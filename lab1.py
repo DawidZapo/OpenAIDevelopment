@@ -3,7 +3,7 @@ from dotenv import load_dotenv
 import os
 import requests
 from bs4 import BeautifulSoup
-from chat_request import get_xyz_url, create_chat_request, get_username, get_pass
+from utils import get_xyz_url, create_chat_request, get_username, get_pass
 
 html_content = requests.get(get_xyz_url()).text
 soup = BeautifulSoup(html_content, "html.parser")

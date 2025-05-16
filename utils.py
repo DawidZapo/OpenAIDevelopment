@@ -56,3 +56,10 @@ def get_username():
 
 def get_pass():
     return password
+
+def create_payload(task: str, apikey: str, answer):
+    return {
+        "task": task,
+        "apikey": apikey,
+        "answer": answer
+    }

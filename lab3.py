@@ -2,8 +2,8 @@ import json
 
 import requests
 
-from chat_request import get_poligon_key, get_centrala_url, create_chat_request
-from prompts import create_give_answers_to_question
+from utils import get_poligon_key, get_centrala_url, create_chat_request, create_payload
+from prompts import create_give_answers_to_question_prompt
 
 
 def split_text_by_length(text, max_chars=3000):
@@ -31,7 +31,7 @@ for element in data_json['test-data']:
         open_question = element['test']['q']
         print(open_question)
         messages = [
-            {"role": "system","content": create_give_answers_to_question()},
+            {"role": "system","content": create_give_answers_to_question_prompt()},
             {"role": "user","content": "Potrzebuję odpowiedzi na następujace pytanie: " + open_question}
         ]
         open_answer = create_chat_request(messages,20)
@@ -48,10 +48,6 @@ for element in data_json['test-data']:
         print(element['answer'])
 
 data_json['apikey'] = get_poligon_key()
-payload = {
-    "task": "JSON",
-    "apikey": get_poligon_key(),
-    "answer": data_json
-}
+payload = create_payload("JSON", get_poligon_key(), data_json)
 # print(data_json)
 print(requests.post(get_centrala_url() + "/report", json=payload).text)
