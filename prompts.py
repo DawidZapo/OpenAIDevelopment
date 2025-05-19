@@ -1,3 +1,6 @@
+from typing import List
+
+
 def create_give_answers_to_question_based_on_context_prompt(context: str):
     return (
             "Jesteś asystentem, który odpowiada na pytania na podstawie dostarczonego kontekstu. "
@@ -34,4 +37,16 @@ def create_anonymize_personal_data_prompt():
         "Jan Kowalski ma 13 lat -> CENZURA ma CENZURA lat"
         "Jan Kowalski mieszka w Katowicach przy ul. Wolności 13 -> CENZURA mieszka w CENZURA przy ul. CENZURA"
         "Nie redagujesz tekstu, nie parafrazujesz, zwracasz słowo w słowo, zwróć tylko i wyłącznie oryginalny tekst jedynie z anonimizacją danych"
+    )
+
+def create_find_street_name_of_university(transcriptions: List[str]):
+    return (
+        "Jesteś asystentem, którego zadaniem będzie dowiedzenie się przy jakiej ulicy znajduje się konkretny instytut uniwersytetu, gdzie pracuje Andrzej Ma"
+        "Dostaniesz transkrypcje rozmów, na których podstawie będziesz musiał podać ulicę"
+        "Andrzej Maj jest to fikcyjan postać, więc informacje na jego temat pozyskasz z transkrypcji rozmów, ale musisz użyć własnej wiedzy na temat konkretnej uczelni"
+        "Uważaj, bo niektóre nagrania są chaotyczne lub mogą wprowadzic w błąd"
+        "Krok po kroku analizuj transkrypcje i wyciągaj wnioski. Na końcu podaj tylko i wyłącznie nazwę ulicy w odmianie przypadku dopełniacza'"
+        "Oto rozmowy: \n ".join(
+            f"Rozmowa {i+1}: {text}" for i, text in enumerate(transcriptions)
+        )
     )

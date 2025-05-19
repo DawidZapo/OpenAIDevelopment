@@ -1,5 +1,4 @@
 import os
-
 from dotenv import load_dotenv
 from langfuse import Langfuse
 from openai import OpenAI
@@ -15,7 +14,7 @@ centrala_url = os.getenv("CENTRALA_URL")
 password = os.getenv("PASSWORD")
 username = os.getenv("USERNAME")
 
-client = OpenAI(api_key=api_key)
+openai_client = OpenAI(api_key=api_key)
 langfuse_client = Langfuse(
     secret_key=langfuse_secret_key,
     public_key=langfuse_public_key,
@@ -28,7 +27,7 @@ def create_chat_request(messages: [], tokens: int):
     span = trace.span(name="openai.chat.completion", input=messages)
 
     try:
-        response = client.chat.completions.create(
+        response = openai_client.chat.completions.create(
             model="gpt-4",
             messages=messages,
             temperature=0.7,
@@ -37,6 +36,26 @@ def create_chat_request(messages: [], tokens: int):
 
         span.end(output=response.choices[0].message.content)
         return response.choices[0].message.content
+
+    except Exception as e:
+        span.end(error_message=str(e))
+        raise
+
+def create_transcribe_request(file_path: str):
+
+    trace = langfuse_client.trace(name="audio-request", user_id="dawidzapo")
+    span = trace.span(name="openai.audio.transcription", input={"file_path": file_path, "language": "pl"})
+
+    try:
+        with open(file_path, "rb") as audio_file:
+            transcript = openai_client.audio.transcriptions.create(
+                model="whisper-1",
+                file=audio_file,
+                language="pl",
+                response_format="text"
+            )
+        span.end(output=transcript)
+        return transcript
 
     except Exception as e:
         span.end(error_message=str(e))
