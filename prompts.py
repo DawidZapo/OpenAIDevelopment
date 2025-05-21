@@ -58,3 +58,9 @@ def create_recognize_city_prompt():
         "Analizuj fragmenty mapy i zidentyfikuj jakie to miasto."
         "Podaj jakie to miasto"
     )
+
+
+def create_image_upon_description_prompt(desc: str):
+    return (
+        "Jesteś asystentem, którego zadaniem będzie wygenerować obraz na podstawie opisu dostarczonego w json: " + desc
+    )

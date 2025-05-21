@@ -1,4 +1,6 @@
 import os
+from imaplib import Literal
+
 from dotenv import load_dotenv
 from langfuse import Langfuse
 from openai import OpenAI
@@ -96,6 +98,27 @@ def create_multi_image_request(image_paths: list[str], prompt: str):
 
         span.end(output=response.choices[0].message.content)
         return response.choices[0].message.content
+
+    except Exception as e:
+        span.end(error_message=str(e))
+        raise
+
+def create_image_request(prompt: str, size: str = "1024x1024"):
+    trace = langfuse_client.trace(name="image-generation-request", user_id="dawidzapo")
+    span = trace.span(name="openai.images.generate", input={"prompt": prompt, "size": size})
+
+    try:
+        response = openai_client.images.generate(
+            model="dall-e-3",
+            prompt=prompt,
+            size=size,
+            n=1,
+            response_format="url"
+        )
+
+        image_url = response.data[0].url
+        span.end(output=image_url)
+        return image_url
 
     except Exception as e:
         span.end(error_message=str(e))
