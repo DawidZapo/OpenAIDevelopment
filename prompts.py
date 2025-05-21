@@ -50,3 +50,11 @@ def create_find_street_name_of_university(transcriptions: List[str]):
             f"Rozmowa {i+1}: {text}" for i, text in enumerate(transcriptions)
         )
     )
+
+def create_recognize_city_prompt():
+    return (
+        "Jesteś asystentem, którego zadaniem będzie rozponać miasto na podstawie 4 schematycznych grafik."
+        "Jedna grafika nie pasuje do pozostałych"
+        "Analizuj fragmenty mapy i zidentyfikuj jakie to miasto."
+        "Podaj jakie to miasto"
+    )

@@ -61,6 +61,47 @@ def create_transcribe_request(file_path: str):
         span.end(error_message=str(e))
         raise
 
+
+def create_multi_image_request(image_paths: list[str], prompt: str):
+    trace = langfuse_client.trace(name="multi-image-request-gpt4o", user_id="dawidzapo")
+    span = trace.span(name="openai.gpt4o.multi-image", input={"image_paths": image_paths, "prompt": prompt})
+
+    try:
+        import base64
+        content_blocks = [{"type": "text", "text": prompt}]
+
+        for image_path in image_paths:
+            with open(image_path, "rb") as image_file:
+                image_data = image_file.read()
+                mime_type = "image/png"
+                base64_image = base64.b64encode(image_data).decode("utf-8")
+
+                content_blocks.append({
+                    "type": "image_url",
+                    "image_url": {
+                        "url": f"data:{mime_type};base64,{base64_image}"
+                    }
+                })
+
+        response = openai_client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {
+                    "role": "user",
+                    "content": content_blocks
+                }
+            ],
+            max_tokens=1000
+        )
+
+        span.end(output=response.choices[0].message.content)
+        return response.choices[0].message.content
+
+    except Exception as e:
+        span.end(error_message=str(e))
+        raise
+
+
 def get_xyz_url():
     return xyz_url
 
