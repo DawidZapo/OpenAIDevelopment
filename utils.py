@@ -1,6 +1,4 @@
 import os
-from imaplib import Literal
-
 from dotenv import load_dotenv
 from langfuse import Langfuse
 from openai import OpenAI
@@ -64,7 +62,7 @@ def create_transcribe_request(file_path: str):
         raise
 
 
-def create_multi_image_request(image_paths: list[str], prompt: str):
+def create_process_image_request(image_paths: list[str], prompt: str):
     trace = langfuse_client.trace(name="multi-image-request-gpt4o", user_id="dawidzapo")
     span = trace.span(name="openai.gpt4o.multi-image", input={"image_paths": image_paths, "prompt": prompt})
 
@@ -103,7 +101,7 @@ def create_multi_image_request(image_paths: list[str], prompt: str):
         span.end(error_message=str(e))
         raise
 
-def create_image_request(prompt: str, size: str = "1024x1024"):
+def create_generate_image_request(prompt: str, size: str = "1024x1024"):
     trace = langfuse_client.trace(name="image-generation-request", user_id="dawidzapo")
     span = trace.span(name="openai.images.generate", input={"prompt": prompt, "size": size})
 
@@ -123,6 +121,13 @@ def create_image_request(prompt: str, size: str = "1024x1024"):
     except Exception as e:
         span.end(error_message=str(e))
         raise
+
+
+def read_file_content(filepath: str):
+    with open(filepath, "r", encoding="utf-8") as file:
+        content =  file.read()
+        return content
+
 
 
 def get_xyz_url():

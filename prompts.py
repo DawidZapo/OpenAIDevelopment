@@ -64,3 +64,21 @@ def create_image_upon_description_prompt(desc: str):
     return (
         "Jesteś asystentem, którego zadaniem będzie wygenerować obraz na podstawie opisu dostarczonego w json: " + desc
     )
+
+
+def create_extract_text_from_image_prompt():
+    return (
+        "Jesteś asystentem, którego zadaniem jest wyodrębnić tekst z podanego obrazka. Zwróć tylko i wyłącznie wyodrębniony tekst"
+    )
+
+def create_categorize_text_prompt():
+    return (
+        "Jesteś asystentem, którego zadaniem jest dopasować kategorię do podanego tekstu"
+        "Dany tekst można skategoryzować jako jako tekst o ludziach lub tekst o hardwarze"
+        "Jeżeli tekst nie pasuje do żadnej z tych kategorii to go pomijamy! Tekst musi pasować, nie tworzymy nowych kategorii"
+        "Dostaniesz tekst w formie mapy, gdzie kluczem będzie nazwa pliku, a wartością będzie tekst do skategoryzowania"
+        "Odpowiedź zwróć w formacie obiektu: {\"people\":[], \"hardware\":[]}. "
+        "Gdzie do tablicy people dodasz klucze, których wartość dotycza ludzi"
+        "a do tablicy hardware dodasz klucze, których wartości dotyczą hardwaru"
+        "Posortuj alfabetycznie nazwy plików w tablicach"
+    )
