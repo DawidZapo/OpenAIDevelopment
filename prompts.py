@@ -82,3 +82,11 @@ def create_categorize_text_prompt():
         "a do tablicy hardware dodasz klucze, których wartości dotyczą hardwaru"
         "Posortuj alfabetycznie nazwy plików w tablicach"
     )
+
+def create_answer_to_questions_accoring_to_context_test_audio_image(context: str):
+    return (
+        "Jesteś asystentem, którego zadaniem jest odpowiedzieć na pytania krótko w 1 zdaniu"
+        "Odpowiedz udzielisz na podstawie kontekstu, którego Tobie dostarczę. Będzie on tekstem, transkrypcją audio oraz opisem grafik"
+        "Odpowiedź zwróć w formacie: { \"idpytania\":\"krótka odpowiedź w 1 zdaniu\"}"
+        "Oto kontekst: " + context
+    )

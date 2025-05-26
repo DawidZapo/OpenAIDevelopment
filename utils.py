@@ -1,4 +1,5 @@
 import os
+import tiktoken
 from dotenv import load_dotenv
 from langfuse import Langfuse
 from openai import OpenAI
@@ -21,14 +22,14 @@ langfuse_client = Langfuse(
     host=langfuse_host
 )
 
-def create_chat_request(messages: [], tokens: int):
+def create_chat_request(messages: [], tokens: int, model: str = "gpt-4") :
 
     trace = langfuse_client.trace(name="chat-request", user_id="dawidzapo")
     span = trace.span(name="openai.chat.completion", input=messages)
 
     try:
         response = openai_client.chat.completions.create(
-            model="gpt-4",
+            model=model,
             messages=messages,
             temperature=0.7,
             max_tokens=tokens
@@ -122,6 +123,15 @@ def create_generate_image_request(prompt: str, size: str = "1024x1024"):
         span.end(error_message=str(e))
         raise
 
+def split_text_by_tokens(text, max_tokens=2000, model="gpt-4"):
+    enc = tiktoken.encoding_for_model(model)
+    tokens = enc.encode(text)
+    chunks = []
+    for i in range(0, len(tokens), max_tokens):
+        chunk_tokens = tokens[i:i + max_tokens]
+        chunk_text = enc.decode(chunk_tokens)
+        chunks.append(chunk_text)
+    return chunks
 
 def read_file_content(filepath: str):
     with open(filepath, "r", encoding="utf-8") as file:
