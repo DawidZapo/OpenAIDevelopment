@@ -90,3 +90,16 @@ def create_answer_to_questions_accoring_to_context_test_audio_image(context: str
         "Odpowiedź zwróć w formacie: { \"idpytania\":\"krótka odpowiedź w 1 zdaniu\"}"
         "Oto kontekst: " + context
     )
+
+
+def create_give_key_words_based_on_reports_and_facts(reports, facts):
+    return (
+        "Jesteś asystentem, którego zadaniem jest podać słowa kluczowe dla danych raportów"
+        "Dla każdego faktu wyekstrahuj kluczowe informacje (np. osoby, ich zawody, specjalne umiejętności)"
+        "Wygeneruj wstępne słowa kluczowe na podstawie jego treści i nazwy pliku. Zidentyfikuj osoby/miejsca wspomniane w raporcie."
+        "Dobierz pasujące fakty (np. dotyczące tych samych osób)."
+        "Połącz słowa kluczowe z raportu ze słowami kluczowymi wynikającymi z powiązanych faktów."
+        "Słowa kluczowa mają być w języku polskim w mianowniku."
+        "Zwróć tylko odpowiedź, odpowiedź ma być w formacie: {\"2024-11-12_report-00-sektor_C4.txt\": \"słowo,kluczowe,przykład1\",\"2024-11-12_report-01-sektor_A1.txt\": \"inne,słowa,przykład2\",}"
+        "O to raporty: " + str(reports) + ". A o to fakty: " + str(facts)
+    )
