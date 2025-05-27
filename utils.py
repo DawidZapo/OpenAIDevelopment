@@ -133,6 +133,13 @@ def split_text_by_tokens(text, max_tokens=2000, model="gpt-4"):
         chunks.append(chunk_text)
     return chunks
 
+def create_embedding(text: str) -> list[float]:
+    response = openai_client.embeddings.create(
+        model="text-embedding-3-large",
+        input=text
+    )
+    return response.data[0].embedding
+
 def read_file_content(filepath: str):
     with open(filepath, "r", encoding="utf-8") as file:
         content =  file.read()
