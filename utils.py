@@ -168,3 +168,10 @@ def create_payload(task: str, apikey: str, answer):
         "apikey": apikey,
         "answer": answer
     }
+
+def create_query_payload(task: str, apikey: str, query):
+    return {
+        "task": task,
+        "apikey": apikey,
+        "query": query
+    }

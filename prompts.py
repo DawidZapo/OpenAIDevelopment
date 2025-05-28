@@ -103,3 +103,15 @@ def create_give_key_words_based_on_reports_and_facts(reports, facts):
         "Zwróć tylko odpowiedź, odpowiedź ma być w formacie: {\"2024-11-12_report-00-sektor_C4.txt\": \"słowo,kluczowe,przykład1\",\"2024-11-12_report-01-sektor_A1.txt\": \"inne,słowa,przykład2\",}"
         "O to raporty: " + str(reports) + ". A o to fakty: " + str(facts)
     )
+
+def create_give_sql_query_prompt(database_metadata: []):
+    return (
+        "Jesteś asystentem, którego zadaniem jest zwrócić zapytanie sql zgodnie z poniższym kontekstem oraz wymaganiami."
+        "O to metadane bazy danych dla której wygenerujesz zapytania. Zawierają ona nazwę tabeli (Table) oraz strukturę tabeli (Create Table)."
+        "" + str(database_metadata[0]['reply'][0]) + "."
+        "" + str(database_metadata[1]['reply'][0]) + "."
+        "" + str(database_metadata[2]['reply'][0]) + "."
+        "" + str(database_metadata[3]['reply'][0]) + "."
+        "Na podstawie tych metadanych bazy zwróć mi zapytanie, które zwróci nam numery ID czynnych datacenter, które zarządzane są przez menadżerów, którzy aktualnie przebywają na urlopie (są nieaktywni)."
+        "Zwróć tylko zapytanie SQL."
+    )
