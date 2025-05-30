@@ -115,3 +115,12 @@ def create_give_sql_query_prompt(database_metadata: []):
         "Na podstawie tych metadanych bazy zwróć mi zapytanie, które zwróci nam numery ID czynnych datacenter, które zarządzane są przez menadżerów, którzy aktualnie przebywają na urlopie (są nieaktywni)."
         "Zwróć tylko zapytanie SQL."
     )
+
+def create_extract_people_and_cities_prompt(notes: str):
+    return (
+        "Jesteś asystentem, którego zadaniem jest wyodrębnić wszystkie osoby oraz miasta jakie pojawiają się w tekście."
+        "O to tekst: " + notes + "."
+        "Odpowiedź zwróć w formacie json {\"people\": [], \"cities\": []} gdzie w polu poeple oraz cities będzie tablica stringów z osobami oraz miastami."
+        "Nie używaj polskich znaków (na przykład Rafal, zamiast Rafał), do tablicy dodawaj tylko imię, bez nazwiska."
+        "Miasta zwróć wielkimi literami, np WARSZAWA."
+    )
