@@ -14,6 +14,9 @@ xyz_url = os.getenv("XYZ_URL")
 centrala_url = os.getenv("CENTRALA_URL")
 password = os.getenv("PASSWORD")
 username = os.getenv("USERNAME")
+neo4j_password = os.getenv("NEO_4J_PASSWORD")
+neo4j_user = os.getenv("NEO_4J_USER")
+neo4j_host = os.getenv("NEO_4J_HOST")
 
 openai_client = OpenAI(api_key=api_key)
 langfuse_client = Langfuse(
@@ -175,3 +178,12 @@ def create_query_payload(task: str, apikey: str, query):
         "apikey": apikey,
         "query": query
     }
+
+def get_neo4j_password():
+    return neo4j_password
+
+def get_neo4j_user():
+    return neo4j_user
+
+def get_neo4j_host():
+    return neo4j_host
