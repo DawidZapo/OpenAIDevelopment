@@ -105,6 +105,40 @@ def create_process_image_request(image_paths: list[str], prompt: str):
         span.end(error_message=str(e))
         raise
 
+def create_process_image_request_from_urls(image_urls: list[str], prompt: str):
+    trace = langfuse_client.trace(name="multi-image-url-request-gpt4o", user_id="dawidzapo")
+    span = trace.span(name="openai.gpt4o.multi-image-url", input={"image_urls": image_urls, "prompt": prompt})
+
+    try:
+        content_blocks = [{"type": "text", "text": prompt}]
+
+        for image_url in image_urls:
+            content_blocks.append({
+                "type": "image_url",
+                "image_url": {
+                    "url": image_url
+                }
+            })
+
+        response = openai_client.chat.completions.create(
+            model="gpt-4o",
+            messages=[
+                {
+                    "role": "user",
+                    "content": content_blocks
+                }
+            ],
+            max_tokens=1000
+        )
+
+        span.end(output=response.choices[0].message.content)
+        return response.choices[0].message.content
+
+    except Exception as e:
+        span.end(error_message=str(e))
+        raise
+
+
 def create_generate_image_request(prompt: str, size: str = "1024x1024"):
     trace = langfuse_client.trace(name="image-generation-request", user_id="dawidzapo")
     span = trace.span(name="openai.images.generate", input={"prompt": prompt, "size": size})

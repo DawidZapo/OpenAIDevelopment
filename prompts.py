@@ -124,3 +124,23 @@ def create_extract_people_and_cities_prompt(notes: str):
         "Nie używaj polskich znaków (na przykład Rafal, zamiast Rafał), do tablicy dodawaj tylko imię, bez nazwiska."
         "Miasta zwróć wielkimi literami, np WARSZAWA."
     )
+
+def create_photo_enhance_prompt():
+    return (
+        "Jesteś asystentem, którego zadaniem jest ocenić jakość fotografii i zadecydować o potrzebnej operacji."
+        "Zwracasz tylko poniższe słowa kluczowe: "
+        "REPAIR (dla szumów/glitchy)"
+        "DARKEN (dla zbyt jasnych)"
+        "BRIGHTEN (dla zbyt ciemnych)"
+        "NONE (dla zdjęć, które nie potrzebują obróki"
+    )
+
+def create_person_description():
+    return(
+        "Jesteś ekspertem w analizie zdjęć i tworzeniu rysopisów. Twoim zadaniem jest obiektywny opis wyglądu osoby, która znajduje się na zdjęciach."
+        "Chodzi o jedną osobę, która pojawia się na wszystkich zdjęciach"
+        "Rysopis musi być dokładny."
+        "Opisz cechy fizyczne postaci."
+        "Rysopis musi być w języku polskim w kodowaniu utf-8."
+        "Zwróć tylko rysopis."
+    )
