@@ -3,8 +3,7 @@ import json
 import requests
 
 from prompts import create_photo_enhance_prompt, create_person_description
-from utils import get_centrala_url, create_payload, get_poligon_key, create_query_payload, create_process_image_request, \
-    create_process_image_request_from_urls
+from utils.utils import get_centrala_url, create_payload, get_poligon_key, create_process_image_request_from_urls
 
 image_url = '/dane/barbara/'
 start_images = ['IMG_559.PNG', 'IMG_1410.PNG', 'IMG_1443.PNG', 'IMG_1444.PNG']

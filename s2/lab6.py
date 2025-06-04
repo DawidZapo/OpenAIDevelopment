@@ -3,7 +3,7 @@ import os
 import requests
 
 from prompts import create_find_street_name_of_university
-from utils import create_transcribe_request, create_chat_request, create_payload, get_poligon_key, get_centrala_url
+from utils.utils import create_transcribe_request, create_chat_request, create_payload, get_poligon_key, get_centrala_url
 
 path = "../audio_files"
 

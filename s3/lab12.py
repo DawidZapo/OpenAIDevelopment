@@ -1,7 +1,7 @@
 import requests
 from qdrant_client import QdrantClient
 
-from utils import create_embedding, create_payload, get_poligon_key, get_centrala_url
+from utils.utils import create_embedding, create_payload, get_poligon_key, get_centrala_url
 
 question = "W raporcie, z którego dnia znajduje się wzmianka o kradzieży prototypu broni?"
 

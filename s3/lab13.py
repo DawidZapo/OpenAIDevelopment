@@ -3,7 +3,7 @@ import json
 import requests
 
 from prompts import create_give_sql_query_prompt
-from utils import get_centrala_url, create_payload, get_poligon_key, create_query_payload, create_chat_request
+from utils.utils import get_centrala_url, create_payload, get_poligon_key, create_query_payload, create_chat_request
 
 connections_metadata = json.loads(requests.post(get_centrala_url() + '/apidb', json=create_query_payload("database", get_poligon_key(), "show create table connections")).text)
 correct_order_metadata = json.loads(requests.post(get_centrala_url() + '/apidb', json=create_query_payload("database", get_poligon_key(), "show create table correct_order")).text)

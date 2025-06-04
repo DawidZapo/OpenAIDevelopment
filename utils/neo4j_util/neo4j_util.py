@@ -1,6 +1,6 @@
 from neo4j import GraphDatabase
 
-from utils import get_neo4j_user, get_neo4j_password, get_neo4j_host
+from utils.utils import get_neo4j_user, get_neo4j_password, get_neo4j_host
 
 driver = GraphDatabase.driver(get_neo4j_host(), auth=(get_neo4j_user(), get_neo4j_password()))
 

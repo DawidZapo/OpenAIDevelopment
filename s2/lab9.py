@@ -3,7 +3,7 @@ import json
 import requests
 
 from prompts import create_extract_text_from_image_prompt, create_categorize_text_prompt
-from utils import read_file_content, create_generate_image_request, create_process_image_request, \
+from utils.utils import read_file_content, create_process_image_request, \
     create_transcribe_request, create_chat_request, create_payload, get_poligon_key, get_centrala_url
 
 data_map = {}

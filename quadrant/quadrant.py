@@ -1,6 +1,6 @@
 from qdrant_client import QdrantClient
 from qdrant_client.models import PointStruct, VectorParams, Distance
-from utils import read_file_content, create_embedding
+from utils.utils import read_file_content, create_embedding
 
 quadrant_client = QdrantClient(host="localhost", port=6333)
 

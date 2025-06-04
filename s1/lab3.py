@@ -2,7 +2,7 @@ import json
 
 import requests
 
-from utils import get_poligon_key, get_centrala_url, create_chat_request, create_payload
+from utils.utils import get_poligon_key, get_centrala_url, create_chat_request, create_payload
 from prompts import create_give_answers_to_question_prompt
 
 

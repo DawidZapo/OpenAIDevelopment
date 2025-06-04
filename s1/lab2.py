@@ -1,7 +1,7 @@
 import json
 import re
 import requests
-from utils import get_xyz_url, create_chat_request
+from utils.utils import get_xyz_url, create_chat_request
 from prompts import create_give_answers_to_question_based_on_context_prompt
 
 html_content = requests.get(get_xyz_url() + "/files/0_13_4b.txt").text

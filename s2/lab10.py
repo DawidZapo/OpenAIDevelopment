@@ -5,7 +5,7 @@ import requests
 from bs4 import BeautifulSoup
 
 from prompts import create_answer_to_questions_accoring_to_context_test_audio_image
-from utils import get_centrala_url, get_poligon_key, create_transcribe_request, create_process_image_request, \
+from utils.utils import get_centrala_url, get_poligon_key, create_transcribe_request, create_process_image_request, \
     create_chat_request, create_payload
 
 questions = requests.get(get_centrala_url() + '/data/' + get_poligon_key() + '/arxiv.txt').text

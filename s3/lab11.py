@@ -3,7 +3,7 @@ import json
 import requests
 
 from prompts import create_give_key_words_based_on_reports_and_facts
-from utils import read_file_content, create_chat_request, create_payload, get_poligon_key, get_centrala_url
+from utils.utils import read_file_content, create_chat_request, create_payload, get_poligon_key, get_centrala_url
 
 facts_file_paths = [f"../text_files/f0{i}.txt" for i in range(1,10)]
 facts = {}

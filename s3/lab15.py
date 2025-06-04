@@ -2,9 +2,8 @@ import json
 
 import requests
 
-from neo4j_util.neo4j_util import driver, find_shortest_path, load_users, load_connections
-from utils import get_centrala_url, get_poligon_key, read_file_content, get_neo4j_user, get_neo4j_password, \
-    create_payload
+from utils.utils import find_shortest_path
+from utils.utils import get_centrala_url, get_poligon_key, read_file_content, create_payload
 
 users_array = json.loads(read_file_content("../text_files/database/users.txt"))['reply']
 connections_array = json.loads(read_file_content("../text_files/database/connections.txt"))['reply']

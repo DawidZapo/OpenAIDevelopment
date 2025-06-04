@@ -3,7 +3,7 @@ import json
 import requests
 
 from prompts import create_extract_people_and_cities_prompt
-from utils import get_centrala_url, create_chat_request, get_poligon_key, create_payload
+from utils.utils import get_centrala_url, create_chat_request, get_poligon_key
 
 notes = requests.get(get_centrala_url() + '/dane/barbara.txt').text
 
