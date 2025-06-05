@@ -144,3 +144,41 @@ def create_person_description():
         "Rysopis musi być w języku polskim w kodowaniu utf-8."
         "Zwróć tylko rysopis."
     )
+
+def create_ask_if_answer_is_possible_prompt(page_text, question):
+    return f"""
+        Na podstawie poniższej strony internetowej odpowiedz tylko TAK lub NIE — czy można jednoznacznie odpowiedzieć na pytanie:
+        
+        Pytanie: "{question}"
+        
+        Strona:
+        -----
+        {page_text[:3000]}
+        -----
+        """
+
+def create_answer_question_based_on_html(question, page_text):
+    return f"""
+        Na podstawie poniższej strony odpowiedz krótko i zwięźle tylko na pytanie, bez zbędnych słowem, najkórcej jak to możliwe:
+        
+        Pytanie: "{question}"
+        
+        Strona:
+        -----
+        {page_text[:3000]}
+        -----
+        """
+
+def create_ask_which_link_prompt(page_text, question, links):
+    return f"""
+        Strona:
+        -----
+        {page_text[:3000]}
+        -----
+        
+        Pytanie: "{question}"
+        
+        Spośród dostępnych linków: {links}
+        Wskaż, który link najlepiej kliknąć, aby znaleźć odpowiedź.
+        Zwróć tylko jeden URL, który wydaje się najlepszy (nie tłumacz się).
+        """

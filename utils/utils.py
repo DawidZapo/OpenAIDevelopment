@@ -17,6 +17,7 @@ username = os.getenv("USERNAME")
 neo4j_password = os.getenv("NEO_4J_PASSWORD")
 neo4j_user = os.getenv("NEO_4J_USER")
 neo4j_host = os.getenv("NEO_4J_HOST")
+softo_url = os.getenv("SOFTO_URL")
 
 openai_client = OpenAI(api_key=api_key)
 langfuse_client = Langfuse(
@@ -221,3 +222,6 @@ def get_neo4j_user():
 
 def get_neo4j_host():
     return neo4j_host
+
+def get_softo_url():
+    return softo_url
