@@ -182,3 +182,11 @@ def create_ask_which_link_prompt(page_text, question, links):
         Wskaż, który link najlepiej kliknąć, aby znaleźć odpowiedź.
         Zwróć tylko jeden URL, który wydaje się najlepszy (nie tłumacz się).
         """
+
+
+def create_answer_questions_based_on_pdf(context: str):
+    return f"""
+    Odpowiadasz na pytania na podstawie notatek Rafała. 
+    Odpowiadaj zwięźle, rzeczowo, najkrócej jak to możliwe. 
+    O to kontkest: {context}
+    """
