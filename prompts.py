@@ -190,3 +190,33 @@ def create_answer_questions_based_on_pdf(context: str):
     Odpowiadaj zwięźle, rzeczowo, najkrócej jak to możliwe. 
     O to kontkest: {context}
     """
+
+
+def recognize_names_based_on_context(context):
+    return (
+        "Dostaniesz json, który symoblizuje rozmowy."
+        "Twoim zadaniem jest wywnioskować jak mają na imię rozmówy z kontekstu ich rozmowy."
+        "Następnie zmień format json, tak aby rozmowy były tablicami, który będą świadczyć kto wypowiada fragment."
+        "Czyli np w tablicy musi być obiekt pole: osoba oraz wartosc."
+        "o to json: " + str(context) + "."
+        "Zwróć tylko poprawiony json"
+    )
+
+
+def create_find_imposter_among_dialogues_prompt(context):
+    return (
+        "Jesteś asystentem, którego zadaniem jest wyłapać, który rozmówca jest kłamcą"
+        "Niestety rozmowy, które ci podam, są dosłownie posiatkowane. Wiemy, że wszystkich rozmów było 5 sztuk"
+        "Twoim zadaniem jest usunąć rozmówce, który podaje sprzeczne informację"
+        "W odpowiedzi zwróć mi tylko obiekt json bez informacji od rozmówcy, który kłamie"
+        "O to rozmowy: " + str(context)
+    )
+
+
+def create_answer_questions_based_on_talks_and_facts(context):
+    return (
+        "Odpowiedz na każde pytanie zgodnie z podanym kontekstem"
+        "Jeśli nie uda ci się znaleźć odpowiedzi w kontekście to udziel odpowiedzi: NIE WIEM."
+        "Zwróć uwagę, że w rozmowach (podane w konteście), jedna osoba kłamię i jej wersji wydarzeń należy nie brać pod uwagę."
+        "O to kontekst: " + str(context) + "."
+    )
